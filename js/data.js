@@ -1,45 +1,46 @@
+import { icon } from "./icons.js";
 export const categories = [
   {
     id: "restaurantes",
     name: "Restaurantes, bares e cafés",
     short: "Restaurantes",
-    icon: "🍴",
-    color: "#ed875b",
+    icon: icon("food"),
+    color: "#2464b4",
   },
   {
     id: "hospedagem",
     name: "Hotéis, pousadas e hospedagem",
     short: "Hospedagem",
-    icon: "⌂",
-    color: "#8d79ba",
+    icon: icon("bed"),
+    color: "#545cae",
   },
   {
     id: "passeios",
     name: "Passeios e experiências",
     short: "Passeios",
-    icon: "⛵",
-    color: "#169b9e",
+    icon: icon("boat"),
+    color: "#078fae",
   },
   {
     id: "turismo",
     name: "Praias e pontos turísticos",
     short: "Pontos turísticos",
-    icon: "☀",
-    color: "#e1ad32",
+    icon: icon("mountain"),
+    color: "#337fab",
   },
   {
     id: "eventos",
     name: "Eventos e festas",
     short: "Eventos",
-    icon: "♫",
-    color: "#d77291",
+    icon: icon("calendar"),
+    color: "#5776c2",
   },
   {
     id: "servicos",
     name: "Comércio e serviços úteis",
     short: "Serviços",
-    icon: "✦",
-    color: "#548fbd",
+    icon: icon("tools"),
+    color: "#358cc0",
   },
 ];
 const seeds = [

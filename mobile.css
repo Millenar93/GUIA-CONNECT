@@ -1,0 +1,895 @@
+/* One live mobile application at every screen size. No device frame or desktop layout. */
+:root {
+  --ink: #173353;
+  --teal: #1559a6;
+  --muted: #576d86;
+  --line: #dce5f0;
+  --paper: #f4f7fc;
+  --deep: #123a72;
+  --cyan: #00a6cd;
+  --viewport-height: 100dvh;
+  --keyboard-offset: 0px;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  background: #e8edf3;
+  font-family: "DM Sans", system-ui, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.app-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 430px;
+  height: var(--viewport-height);
+  max-height: 960px;
+  background: var(--paper);
+  overflow: hidden;
+  box-shadow: 0 0 40px #17335312;
+}
+.app-shell header {
+  position: relative;
+  width: 100%;
+  height: 88px;
+  min-height: 88px;
+  padding: 10px 16px 0;
+  display: block;
+  background: white;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.app-shell .brand {
+  display: inline-flex;
+  font-size: 22px;
+  color: var(--deep);
+  height: 30px;
+  text-decoration: none;
+}
+.app-shell .brand span {
+  font-size: 22px;
+  letter-spacing: -0.8px;
+}
+.app-shell .brand b {
+  color: var(--teal);
+  font-weight: 800;
+}
+.app-shell .demo {
+  position: absolute;
+  top: 15px;
+  right: 14px;
+  font-size: 8px;
+  letter-spacing: 0;
+  padding: 5px 6px;
+  color: #735822;
+}
+.app-shell #city {
+  display: block;
+  width: auto;
+  min-height: 44px;
+  padding: 7px 0;
+  font-size: 12px;
+  background: transparent;
+  border: 0;
+  margin: 0;
+  color: var(--muted);
+}
+.app-shell main {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  min-height: 0;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 25px 18px 30px;
+  scroll-padding-block: 20px;
+  overscroll-behavior-y: contain;
+}
+.app-shell h1 {
+  font-size: 27px;
+  line-height: 1.25;
+  letter-spacing: -1px;
+}
+.app-shell h2 {
+  font-size: 22px;
+}
+.app-shell h3 {
+  font-size: 17px;
+}
+.app-shell p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+.app-shell .eyebrow {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--teal);
+}
+.app-shell .primary {
+  background: var(--deep);
+  border-color: var(--deep);
+  color: white;
+}
+.app-shell button,
+.app-shell a {
+  max-width: 100%;
+}
+.app-shell button {
+  min-height: 44px;
+}
+.app-shell .toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0;
+}
+.app-shell input,
+.app-shell textarea,
+.app-shell select {
+  font-size: 16px;
+  min-height: 46px;
+  max-width: 100%;
+  width: 100%;
+  border-radius: 12px;
+}
+.app-shell input[type="checkbox"],
+.app-shell input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  min-height: 20px;
+}
+.app-shell label {
+  font-size: 13px;
+}
+.app-shell .form-grid,
+.app-shell .detail-layout {
+  display: block;
+}
+.app-shell .intro {
+  display: block;
+}
+.app-shell .intro .search-container {
+  margin-top: 18px;
+}
+.app-shell .intro p {
+  margin-top: 10px;
+}
+.app-shell .grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.app-shell .grid.places {
+  display: block;
+}
+.app-shell .category {
+  padding: 20px 15px;
+  min-height: 165px;
+  background: white;
+  text-align: left;
+  box-shadow: 0 3px 12px #17335304;
+}
+.app-shell .category b {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.app-shell .category small {
+  font-size: 11px;
+  line-height: 1.5;
+}
+.app-shell .category .symbol {
+  display: flex;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
+  background: #edf4fc;
+  margin: 0 0 17px;
+  padding: 10px;
+}
+.line-icon {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.symbol .line-icon {
+  width: 28px;
+  height: 28px;
+}
+.pin span .line-icon {
+  width: 20px;
+  height: 20px;
+}
+.app-shell .card {
+  margin-bottom: 17px;
+  box-shadow: 0 3px 14px #17335306;
+  border-radius: 18px;
+}
+.app-shell .card img {
+  height: 165px;
+}
+.app-shell .card-content {
+  padding: 18px;
+}
+.app-shell .card-content p {
+  font-size: 12px;
+}
+.app-shell .card-bottom {
+  gap: 14px;
+  align-items: center;
+}
+.app-shell .card-bottom small {
+  font-size: 10px;
+  flex: 1;
+  line-height: 1.5;
+}
+.app-shell .card-bottom button {
+  min-height: 44px;
+  flex-shrink: 0;
+}
+.app-shell .favorite {
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+}
+.app-shell .panel {
+  padding: 21px;
+  border-radius: 18px;
+  margin-bottom: 18px;
+}
+.app-shell .notice {
+  font-size: 12px;
+  color: #315b85;
+  background: #eaf2fc;
+  padding: 14px;
+  border-radius: 12px;
+}
+.app-shell .empty {
+  padding: 30px 18px;
+}
+.app-shell .empty button {
+  margin: 5px 0;
+}
+.app-shell .profile,
+.app-shell .full-details {
+  max-width: none;
+}
+.app-shell .avatar {
+  background: #e3efff;
+  color: var(--deep);
+}
+.app-shell .welcome {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.app-shell .welcome-photo {
+  min-height: 200px;
+  height: 220px;
+  flex-shrink: 0;
+  padding: 25px;
+  border-radius: 20px;
+  background-image:
+    linear-gradient(0deg, #123a7299, #0000), url("illustration.svg");
+  color: white;
+}
+.app-shell .welcome-photo h1 {
+  font-size: 32px;
+}
+.app-shell .welcome-photo p {
+  font-size: 12px;
+  margin: 7px 0 0;
+}
+.app-shell .welcome-content {
+  width: 100%;
+  padding: 26px 2px 0;
+}
+.app-shell .welcome-content h1 {
+  font-size: 28px;
+}
+.app-shell .role {
+  margin: 20px 0 10px;
+}
+.app-shell .role button {
+  padding: 10px;
+}
+.app-shell .welcome-content .primary,
+.app-shell .welcome-content .outline {
+  width: 100%;
+}
+.app-shell .footer-note {
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.app-shell .detail-hero {
+  height: 210px;
+}
+.app-shell .links {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+.app-shell .links a,
+.app-shell .links button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  font-size: 12px;
+  text-align: center;
+  padding: 12px 9px;
+  background: #eef5ff;
+  border-color: #d9e8fc;
+  color: #12477d;
+}
+.app-shell .menu-item {
+  gap: 12px;
+  font-size: 13px;
+}
+.app-shell .menu-item > div {
+  min-width: 0;
+}
+.app-shell .menu-item > b {
+  white-space: nowrap;
+}
+.app-shell .rank {
+  display: grid;
+  grid-template-columns: 30px 58px 1fr;
+  gap: 10px;
+  padding: 14px 12px;
+  align-items: center;
+  position: relative;
+}
+.app-shell .rank strong {
+  font-size: 24px;
+  min-width: 0;
+  color: var(--teal);
+}
+.app-shell .rank img {
+  width: 58px;
+  height: 64px;
+  border-radius: 12px;
+}
+.app-shell .rank > div {
+  min-width: 0;
+}
+.app-shell .rank h3 {
+  font-size: 15px;
+}
+.app-shell .rank p {
+  font-size: 11px;
+}
+.app-shell .rank small {
+  font-size: 10px;
+  line-height: 1.5;
+}
+.app-shell .rank-actions {
+  grid-column: 2/4;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+.app-shell .rank-actions button {
+  margin: 0;
+  font-size: 12px;
+}
+.app-shell .rank-favorite {
+  width: 44px;
+  padding: 0;
+  font-size: 24px;
+}
+.app-shell .rank-favorite.saved {
+  color: #b13e58;
+}
+.app-shell nav {
+  position: relative;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  z-index: 650;
+  width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  gap: 0;
+  padding: 10px 5px calc(10px + env(safe-area-inset-bottom));
+  background: white;
+  border-top: 1px solid var(--line);
+  box-shadow: 0 -4px 20px #123a7207;
+}
+.app-shell nav button {
+  width: 20%;
+  min-width: 0;
+  min-height: 54px;
+  padding: 4px 2px;
+  background: transparent;
+  border-radius: 12px;
+  gap: 5px;
+  font-size: 10px;
+}
+.app-shell nav button.active {
+  color: var(--teal);
+  background: #eef4fd;
+}
+.app-shell nav .nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  font-size: 23px;
+}
+.app-shell nav .nav-icon svg {
+  width: 23px;
+  height: 23px;
+}
+.app-shell nav button.center .nav-icon {
+  height: 45px;
+  width: 51px;
+  border-radius: 16px;
+  background: var(--deep);
+  padding: 10px;
+  box-shadow: 0 4px 12px #123a7230;
+  margin-top: -18px;
+}
+.app-shell nav button.center.active .nav-icon {
+  background: linear-gradient(135deg, var(--deep), var(--cyan));
+}
+#overlay-root {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 600;
+}
+.app-shell .place-sheet {
+  pointer-events: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: auto;
+  bottom: calc(76px + env(safe-area-inset-bottom));
+  width: 100%;
+  height: 50%;
+  max-height: none;
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -7px 30px #123a7233;
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.app-shell .place-sheet.expanded {
+  width: 100%;
+  height: calc(100% - 115px - env(safe-area-inset-bottom));
+  top: auto;
+}
+.app-shell .sheet-handle {
+  display: block;
+  flex-shrink: 0;
+  background: #c5d5e8;
+  width: 40px;
+  height: 4px;
+  margin: 10px auto 2px;
+  border-radius: 5px;
+}
+.app-shell .sheet-actions {
+  padding: 5px 15px 8px;
+  flex-shrink: 0;
+  background: white;
+  border-bottom: 1px solid var(--line);
+}
+.app-shell .sheet-actions button {
+  min-height: 44px;
+  font-size: 12px;
+  padding: 8px 12px;
+}
+.app-shell .sheet-content {
+  overflow: auto;
+  min-height: 0;
+  flex: 1;
+  padding: 18px;
+  scroll-padding: 15px;
+  overscroll-behavior: contain;
+}
+.app-shell .sheet-content h2 {
+  font-size: 23px;
+}
+.app-shell .sheet-content p {
+  font-size: 12px;
+}
+.app-shell .sheet-content .sheet-photo {
+  height: 150px;
+  min-height: 150px;
+  display: block;
+  border-radius: 15px;
+}
+.app-shell .sheet-content .panel {
+  padding: 16px;
+}
+.app-shell .sheet-fav {
+  width: 44px;
+  height: 44px;
+}
+.app-shell .stars-field {
+  gap: 4px;
+  flex-wrap: nowrap;
+  padding: 12px 6px;
+}
+.app-shell .stars-field label {
+  min-height: 44px;
+  font-size: 12px;
+  padding: 0;
+  gap: 2px;
+}
+.app-shell .stars-field input {
+  width: 17px;
+  height: 17px;
+  min-height: 17px;
+}
+.app-shell .page-map {
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  background: #dce8f4;
+}
+.app-shell .map-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+.app-shell .workspace {
+  position: absolute;
+  inset: 0;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+.app-shell .map-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+}
+.app-shell #map {
+  height: 100%;
+  min-height: 0;
+  width: 100%;
+  background: #e1e9f3;
+}
+.app-shell .map-top {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 14px;
+  z-index: 500;
+}
+.app-shell .search-container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+.app-shell .search {
+  padding: 3px 7px 3px 11px;
+  background: white;
+  gap: 2px;
+  max-width: none;
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 4px 16px #17335312;
+  min-height: 52px;
+}
+.app-shell .search > .line-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--teal);
+  margin-right: 5px;
+}
+.app-shell .search input {
+  min-width: 0;
+  padding: 8px 3px;
+  border: 0;
+  font-size: 16px;
+  min-height: 44px;
+  outline: none;
+}
+.app-shell .search button {
+  width: 44px;
+  min-height: 44px;
+  padding: 10px;
+  border: 0;
+  flex-shrink: 0;
+}
+.app-shell .search button .line-icon {
+  width: 20px;
+  height: 20px;
+}
+.app-shell .suggestions {
+  max-height: 240px;
+  overflow: auto;
+  margin-top: 5px;
+  border-radius: 15px;
+}
+.app-shell .suggestions button {
+  min-height: 58px;
+  padding: 12px;
+}
+.app-shell .suggestions small {
+  font-size: 11px;
+}
+.app-shell .location-bar {
+  display: block;
+  margin: 9px 0 0;
+  padding: 9px 12px;
+  border: 1px solid #d6e2f0;
+  background: #fffffff0;
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+}
+.app-shell .location-bar span {
+  display: block;
+  font-size: 10px;
+  min-width: 0;
+  color: #355475;
+  line-height: 1.45;
+}
+.app-shell .location-options {
+  display: flex;
+  gap: 12px;
+  margin-top: 2px;
+}
+.app-shell .location-options button {
+  min-height: 44px;
+  border: 0;
+  padding: 5px 0;
+  background: transparent;
+  text-decoration: underline;
+  font-size: 11px;
+  flex: 1;
+  text-align: left;
+}
+.app-shell .map-tools {
+  display: flex;
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 44px;
+  z-index: 500;
+  justify-content: space-between;
+  gap: 10px;
+  pointer-events: none;
+}
+.app-shell .map-tools button {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: white;
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 15px #17335315;
+  padding: 12px;
+  font-size: 12px;
+  min-height: 46px;
+}
+.app-shell .map-tools .line-icon {
+  width: 19px;
+  height: 19px;
+  color: var(--teal);
+}
+.app-shell .map-note {
+  bottom: 21px;
+  left: 12px;
+  max-width: calc(100% - 24px);
+  font-size: 9px;
+  padding: 5px 7px;
+  border-radius: 6px;
+  margin: 0;
+  pointer-events: none;
+}
+.app-shell .workspace.map-mode > aside {
+  display: none;
+}
+.app-shell .workspace.list-mode .map-wrap {
+  display: none;
+}
+.app-shell .workspace.list-mode > aside {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  inset: 165px 14px 102px;
+  min-height: 0;
+  padding: 0;
+  background: var(--paper);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.app-shell .results {
+  min-height: 0;
+  max-height: none;
+  overflow: auto;
+  flex: 1;
+  padding: 0 4px 10px;
+}
+.app-shell .result-head {
+  margin: 0;
+  font-size: 11px;
+  gap: 10px;
+}
+.app-shell .result-head button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  padding: 4px 8px;
+  min-height: 44px;
+}
+.app-shell .filter-summary {
+  font-size: 11px;
+  margin: 8px 0;
+}
+.app-shell .workspace .toolbar {
+  margin: 4px 0 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  flex-shrink: 0;
+}
+.app-shell .workspace select {
+  font-size: 12px;
+  padding: 8px;
+  min-width: 0;
+}
+.app-shell .leaflet-control-zoom {
+  margin-top: 185px;
+  margin-left: 14px;
+}
+.app-shell .leaflet-control-zoom a {
+  width: 38px;
+  height: 38px;
+  line-height: 38px;
+}
+.app-shell .leaflet-control-attribution {
+  font-size: 9px;
+}
+.app-shell .user-position {
+  background: #1d6ef2;
+  box-shadow:
+    0 0 0 6px #1d6ef225,
+    0 2px 8px #1235;
+}
+.app-shell .user-position.manual {
+  background: #ae6f25;
+  box-shadow: 0 0 0 6px #ae6f2520;
+}
+.app-shell .leaflet-tooltip {
+  font-size: 11px;
+}
+.app-shell .pin {
+  box-shadow: 0 3px 9px #1235;
+}
+dialog {
+  width: calc(100% - 24px);
+  max-width: 402px;
+  max-height: calc(var(--viewport-height) - 24px);
+  overflow: auto;
+  padding: 24px;
+  border-radius: 22px;
+  scroll-padding: 16px;
+}
+dialog input,
+dialog textarea,
+dialog select {
+  font-size: 16px;
+  min-height: 46px;
+}
+dialog button {
+  min-height: 44px;
+}
+dialog .dialog-close {
+  width: 44px;
+  padding: 0;
+  font-size: 25px;
+}
+#toast {
+  position: absolute;
+  bottom: calc(90px + env(safe-area-inset-bottom));
+  left: 50%;
+  width: max-content;
+  max-width: calc(100% - 32px);
+  transform: translateX(-50%);
+  font-size: 12px;
+  padding: 13px 16px;
+  background: var(--deep);
+  z-index: 1000;
+  border-radius: 12px;
+  pointer-events: none;
+}
+.app-shell .hidden {
+  display: none !important;
+}
+.app-shell :focus-visible {
+  outline: 3px solid #00a6cd;
+  outline-offset: 3px;
+}
+@media (max-width: 480px) {
+  .app-shell {
+    max-width: none;
+    max-height: none;
+    box-shadow: none;
+    align-self: flex-start;
+    transform: translateY(var(--keyboard-offset));
+  }
+  .app-shell header {
+    padding-top: calc(10px + env(safe-area-inset-top));
+    height: calc(88px + env(safe-area-inset-top));
+    min-height: calc(88px + env(safe-area-inset-top));
+  }
+  .app-shell .demo {
+    top: calc(15px + env(safe-area-inset-top));
+  }
+}
+@media (max-height: 550px) {
+  .app-shell .location-options {
+    display: none;
+  }
+  .app-shell .workspace.list-mode > aside {
+    top: 110px;
+    bottom: 65px;
+  }
+  .app-shell .map-tools {
+    bottom: 29px;
+  }
+  .app-shell .place-sheet.expanded {
+    height: calc(100% - 90px - env(safe-area-inset-bottom));
+  }
+  .app-shell .leaflet-control-zoom {
+    margin-top: 120px;
+  }
+}
+.app-shell .stars-field label {
+  flex: 1;
+  justify-content: center;
+  min-width: 0;
+}
+.app-shell .demo {
+  font-size: 9px;
+}
+.app-shell .search-container button:focus-visible {
+  outline-offset: 0;
+}
+.app-shell main:not(.page-map) {
+  padding-bottom: calc(30px + env(safe-area-inset-bottom));
+}
+.app-shell .favorite,
+.app-shell .sheet-fav,
+.app-shell .rank-favorite {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.app-shell .saved .line-icon {
+  fill: currentColor;
+}
+.app-shell .sheet-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.app-shell .sheet-actions .line-icon {
+  width: 17px;
+  height: 17px;
+}
