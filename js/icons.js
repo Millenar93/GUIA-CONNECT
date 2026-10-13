@@ -1,5 +1,6 @@
 // Shared line icons: the same stroke, proportions and family across the application.
 const paths = {
+  arrow: '<path d="M5 12h14m-6-6 6 6-6 6"/>',
   photo:
     '<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="2"/><path d="m3 17 6-6 4 4 3-3 5 5"/>',
   clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
