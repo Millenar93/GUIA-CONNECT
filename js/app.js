@@ -267,11 +267,18 @@ function initMap() {
       '<div class="empty"><h2>Seu guia continua aqui.</h2><p>Não foi possível carregar o mapa. Explore os registros na lista.</p><button id="fallback-list">Ver lista de lugares</button></div>';
     return;
   }
-  map = L.map("map", { scrollWheelZoom: true, zoomAnimation: false }).setView(
+  map = L.map("map", {
+    scrollWheelZoom: true,
+    zoomAnimation: false,
+    zoomControl: false,
+  }).setView(
     mapViewport?.center ||
       (location ? [location.lat, location.lng] : [-23.612, -45.398]),
     mapViewport?.zoom ?? (location ? 14 : 12),
   );
+  L.control
+    .zoom({ zoomInTitle: "Ampliar mapa", zoomOutTitle: "Reduzir mapa" })
+    .addTo(map);
   markerLayer = L.layerGroup().addTo(map);
   positionLayer = L.layerGroup().addTo(map);
   tileFailures = 0;
@@ -657,7 +664,7 @@ function specific(p) {
   }[p.category];
 }
 function topPage() {
-  app.innerHTML = `<span class="eyebrow">RANKINGS · CARAGUATATUBA/SP</span><h1>Top 10 por categoria.</h1><p>Escolha uma categoria para ver os registros avaliados neste navegador.</p><div class="notice">Ranking de teste local — não representa avaliações reais. Sem avaliações, não há lugares classificados.</div><div class="grid" style="margin-top:24px">${categories.map((c) => `<button class="category" data-top-category="${c.id}"><span class="symbol" style="color:${c.color}">${c.icon}</span><b>${c.short}</b><small>Ver ranking da categoria →</small></button>`).join("")}</div>`;
+  app.innerHTML = `<section class="visual-hero"><span class="eyebrow">RANKINGS DO GUIA CONNECT</span><h1>Top 10 por categoria.</h1><strong>Caraguatatuba</strong><small>Imagem ilustrativa · avaliações de teste local</small></section><p>Escolha uma categoria para ver os registros avaliados neste navegador.</p><div class="notice">Ranking de teste local — não representa avaliações reais. Sem avaliações, não há lugares classificados.</div><div class="grid" style="margin-top:24px">${categories.map((c) => `<button class="category" data-top-category="${c.id}"><span class="symbol" style="color:${c.color}">${c.icon}</span><b>${c.short}</b><small>Ver ranking da categoria →</small></button>`).join("")}</div>`;
 }
 function topCategoryPage(id) {
   const members = ranking(all(), reviews, id);
@@ -668,7 +675,7 @@ function topCategoryPage(id) {
   );
   if (topOrder === "distance" && location)
     list.sort((a, b) => distance(a) - distance(b) || a.rank - b.rank);
-  app.innerHTML = `<button data-go="top">← Categorias do Top 10</button><span class="eyebrow" style="display:block;margin-top:20px">CARAGUATATUBA/SP</span><h1>Top 10 · ${cat(id).short}</h1><div class="notice">Ranking de teste local — não representa avaliações reais. Nota média decrescente; desempate por quantidade de avaliações e ID estável. Somente lugares avaliados entram, até dez por categoria.</div><p>A ordem por distância reorganiza os integrantes e preserva sua posição original no ranking. Distâncias em linha reta${location?.source === "manual" ? " a partir do ponto manual" : ""}.</p><div class="toolbar"><select id="top-order" aria-label="Ordenar Top 10"><option value="rating" ${topOrder === "rating" ? "selected" : ""}>Avaliação Guia Connect</option><option value="distance" ${!location ? "disabled" : ""} ${topOrder === "distance" ? "selected" : ""}>Distância ${!location ? "(sem localização)" : ""}</option></select><select id="top-district" aria-label="Bairro no Top 10"><option value="">Todos os bairros</option>${[...new Set(all().map((p) => p.district))].map((d) => `<option ${topDistrict === d ? "selected" : ""}>${escape(d)}</option>`).join("")}</select><select id="top-min" aria-label="Nota mínima no Top 10"><option value="0">Todas as notas</option>${[1, 2, 3, 4, 5].map((n) => `<option value="${n}" ${topMin === n ? "selected" : ""}>A partir de ${n} ★</option>`).join("")}</select></div>${list.length ? list.map((p) => `<article class="rank" data-rank="${p.rank}"><strong>${String(p.rank).padStart(2, "0")}</strong><img src="${escape(p.image)}" alt="Imagem ilustrativa"><div><h3>${escape(p.name)}</h3><p>${ratingLabel(p)}</p><small>${distanceLabel(p)}</small></div><div class="rank-actions"><button data-fav="${p.id}" class="rank-favorite ${favorites.includes(p.id) ? "saved" : ""}" aria-label="Favoritar ${escape(p.name)}" aria-pressed="${favorites.includes(p.id)}">${icon("heart")}</button><button data-place="${p.id}">Conhecer ↗</button></div></article>`).join("") : '<div class="empty"><h3>Nenhum registro elegível.</h3><p>Avalie um exemplo no guia para testar este ranking ou ajuste os filtros.</p><button data-go="mapa">Explorar o guia</button></div>'}`;
+  app.innerHTML = `<button data-go="top">← Categorias do Top 10</button><span class="eyebrow" style="display:block;margin-top:20px">CARAGUATATUBA/SP</span><div class="ranking-heading"><h1>Top 10 · ${cat(id).short}</h1><p>Registros avaliados no Guia Connect</p></div><div class="notice">Ranking de teste local — não representa avaliações reais. Nota média decrescente; desempate por quantidade de avaliações e ID estável. Somente lugares avaliados entram, até dez por categoria.</div><p>A ordem por distância reorganiza os integrantes e preserva sua posição original no ranking. Distâncias em linha reta${location?.source === "manual" ? " a partir do ponto manual" : ""}.</p><div class="toolbar"><select id="top-order" aria-label="Ordenar Top 10"><option value="rating" ${topOrder === "rating" ? "selected" : ""}>Avaliação Guia Connect</option><option value="distance" ${!location ? "disabled" : ""} ${topOrder === "distance" ? "selected" : ""}>Distância ${!location ? "(sem localização)" : ""}</option></select><select id="top-district" aria-label="Bairro no Top 10"><option value="">Todos os bairros</option>${[...new Set(all().map((p) => p.district))].map((d) => `<option ${topDistrict === d ? "selected" : ""}>${escape(d)}</option>`).join("")}</select><select id="top-min" aria-label="Nota mínima no Top 10"><option value="0">Todas as notas</option>${[1, 2, 3, 4, 5].map((n) => `<option value="${n}" ${topMin === n ? "selected" : ""}>A partir de ${n} ★</option>`).join("")}</select></div>${list.length ? list.map((p) => `<article class="rank" data-rank="${p.rank}"><strong>${String(p.rank).padStart(2, "0")}</strong><img src="${escape(p.image)}" alt="Imagem ilustrativa"><div><h3>${escape(p.name)}</h3><p>${ratingLabel(p)}</p><small>${distanceLabel(p)}</small></div><div class="rank-actions"><button data-fav="${p.id}" class="rank-favorite ${favorites.includes(p.id) ? "saved" : ""}" aria-label="Favoritar ${escape(p.name)}" aria-pressed="${favorites.includes(p.id)}">${icon("heart")}</button><button data-place="${p.id}">Conhecer ↗</button></div></article>`).join("") : '<div class="empty"><h3>Nenhum registro elegível.</h3><p>Avalie um exemplo no guia para testar este ranking ou ajuste os filtros.</p><button data-go="mapa">Explorar o guia</button></div>'}`;
 }
 function profilePage() {
   app.innerHTML = `<section class="profile"><span class="eyebrow">SEU ESPAÇO NA CIDADE</span><h1>Olá, ${escape(session?.name || "visitante")}.</h1><div class="panel"><div class="avatar">${escape((session?.name || "V").slice(0, 1).toUpperCase())}</div><h3>${escape(session?.name || "Explorador visitante")}</h3><p>${session ? "Sessão de demonstração" : "Você está explorando sem cadastro"} · Caraguatatuba/SP</p>${!session ? '<button data-auth="cadastro" class="primary">Criar conta demonstrativa</button>' : ""}<button data-go="favoritos">♡ Meus favoritos (${favorites.length})</button>${session?.role === "empresa" ? '<button data-go="empresa">Painel da empresa</button>' : ""}</div><div class="panel"><h2>O que você gosta de descobrir?</h2><p>Preferências locais para esta demonstração.</p>${categories.map((c) => `<label><input type="checkbox" data-pref="${c.id}" ${preferences.includes(c.id) ? "checked" : ""} style="display:inline;width:auto;margin-right:10px">${c.name}</label>`).join("")}</div><div class="toolbar"><button id="logout">Sair da sessão de demonstração</button><button id="clear">Limpar dados locais de teste</button></div></section>`;
@@ -680,7 +687,7 @@ function businessPage() {
     return;
   }
   const p = { ...all()[0], ...(previewData || {}) };
-  app.innerHTML = `<div class="intro"><div><span class="eyebrow">ESPAÇO DA EMPRESA · DEMONSTRAÇÃO</span><h1>Minha empresa</h1><p>${escape(p.name)} · ${escape(cat(p.category).short)}</p></div><button data-go="mapa">Acessar o guia ↗</button></div><div class="notice">As alterações ficam apenas neste navegador. Não são publicadas para outros usuários. Não insira informações pessoais ou confidenciais.</div><div class="detail-layout" style="margin-top:24px"><form id="business" class="panel"><h2>Informações do estabelecimento</h2><label>Nome<input name="name" required maxlength="80" value="${escape(p.name)}"></label><label>Categoria<select name="category">${categories.map((c) => `<option value="${c.id}" ${c.id === p.category ? "selected" : ""}>${c.name}</option>`).join("")}</select></label><label>Descrição<textarea name="description" required maxlength="1000">${escape(p.description)}</textarea></label><div class="form-grid"><label>Bairro<select name="district">${[...new Set(places.map((x) => x.district))].map((d) => `<option ${d === p.district ? "selected" : ""}>${escape(d)}</option>`).join("")}</select></label><label>Contato demonstrativo<input name="contact" maxlength="100" value="${escape(p.contact)}"></label></div><label>Endereço demonstrativo<input name="address" required maxlength="150" value="${escape(p.address)}"></label><label>Horários demonstrativos<input name="hours" required maxlength="150" value="${escape(p.hours)}"></label><h2>Posição e fotos</h2><p>Coordenadas do exemplo e imagem ilustrativa; não publique dados reais nesta demonstração.</p><div class="form-grid"><label>Latitude<input type="number" name="lat" required min="-90" max="90" step="any" value="${p.lat}"></label><label>Longitude<input type="number" name="lng" required min="-180" max="180" step="any" value="${p.lng}"></label></div><label>URL da foto ilustrativa ou autorizada<input type="url" name="image" value="${p.image === "illustration.svg" ? "" : escape(p.image)}" placeholder="https://… (vazio usa ilustração local)"></label><h2>Informações por categoria</h2>${Object.entries(
+  app.innerHTML = `<div class="intro"><div><span class="eyebrow">ESPAÇO DA EMPRESA · DEMONSTRAÇÃO</span><h1>Minha empresa</h1><p>${escape(p.name)} · ${escape(cat(p.category).short)}</p></div><button data-go="mapa">Acessar o guia ↗</button></div><section class="business-cover"><img src="${escape(p.image)}" alt="Foto ilustrativa do estabelecimento"><div><b>${escape(p.name)}</b><span>${escape(cat(p.category).short)} · Caraguatatuba/SP</span></div></section><div class="business-shortcuts"><button data-business-section="business-photos">${icon("photo")}<span><b>Fotos e posição</b><small>Apresente seu estabelecimento</small></span>›</button>${p.category === "restaurantes" ? `<button data-business-section="menu-editor">${icon("food")}<span><b>Cardápio</b><small>Edite itens e preços de teste</small></span>›</button>` : ""}<button data-business-section="business-hours">${icon("clock")}<span><b>Horários</b><small>Defina os horários demonstrativos</small></span>›</button><button data-business-section="business-links">${icon("link")}<span><b>Contatos e links</b><small>Gerencie seus canais cadastrados</small></span>›</button></div><div class="notice">As alterações ficam apenas neste navegador. Não são publicadas para outros usuários. Não insira informações pessoais ou confidenciais.</div><div class="detail-layout" style="margin-top:24px"><form id="business" class="panel"><h2>Informações do estabelecimento</h2><label>Nome<input name="name" required maxlength="80" value="${escape(p.name)}"></label><label>Categoria<select name="category">${categories.map((c) => `<option value="${c.id}" ${c.id === p.category ? "selected" : ""}>${c.name}</option>`).join("")}</select></label><label>Descrição<textarea name="description" required maxlength="1000">${escape(p.description)}</textarea></label><div class="form-grid"><label>Bairro<select name="district">${[...new Set(places.map((x) => x.district))].map((d) => `<option ${d === p.district ? "selected" : ""}>${escape(d)}</option>`).join("")}</select></label><label>Contato demonstrativo<input name="contact" maxlength="100" value="${escape(p.contact)}"></label></div><label>Endereço demonstrativo<input name="address" required maxlength="150" value="${escape(p.address)}"></label><label id="business-hours">Horários demonstrativos<input name="hours" required maxlength="150" value="${escape(p.hours)}"></label><h2 id="business-photos">Posição e fotos</h2><p>Coordenadas do exemplo e imagem ilustrativa; não publique dados reais nesta demonstração.</p><div class="form-grid"><label>Latitude<input type="number" name="lat" required min="-90" max="90" step="any" value="${p.lat}"></label><label>Longitude<input type="number" name="lng" required min="-180" max="180" step="any" value="${p.lng}"></label></div><label>URL da foto ilustrativa ou autorizada<input type="url" name="image" value="${p.image === "illustration.svg" ? "" : escape(p.image)}" placeholder="https://… (vazio usa ilustração local)"></label><h2>Informações por categoria</h2>${Object.entries(
     {
       amenities: "Comodidades de hospedagem",
       duration: "Duração do passeio",
@@ -696,7 +703,7 @@ function businessPage() {
     )
     .join(
       "",
-    )}<div class="form-grid" data-info="meeting-coordinates"><label>Latitude do ponto de encontro / evento (opcional)<input type="number" step="any" min="-90" max="90" name="info-meetingLat" value="${p.info?.meetingLat ?? ""}"></label><label>Longitude do ponto de encontro / evento (opcional)<input type="number" step="any" min="-180" max="180" name="info-meetingLng" value="${p.info?.meetingLng ?? ""}"></label></div><h2>Links externos específicos</h2><p>Use HTTPS e um destino específico do estabelecimento na plataforma indicada. Deixe em branco quando não houver link.</p>${Object.entries(
+    )}<div class="form-grid" data-info="meeting-coordinates"><label>Latitude do ponto de encontro / evento (opcional)<input type="number" step="any" min="-90" max="90" name="info-meetingLat" value="${p.info?.meetingLat ?? ""}"></label><label>Longitude do ponto de encontro / evento (opcional)<input type="number" step="any" min="-180" max="180" name="info-meetingLng" value="${p.info?.meetingLng ?? ""}"></label></div><h2 id="business-links">Links externos específicos</h2><p>Use HTTPS e um destino específico do estabelecimento na plataforma indicada. Deixe em branco quando não houver link.</p>${Object.entries(
     platforms,
   )
     .map(
@@ -935,6 +942,14 @@ function suggestions() {
 document.addEventListener("click", (e) => {
   const b = e.target.closest("button");
   if (!b) return;
+  if (b.dataset.businessSection) {
+    const section = document.getElementById(b.dataset.businessSection);
+    section?.scrollIntoView({ block: "start", behavior: "smooth" });
+    if (section) {
+      section.setAttribute("tabindex", "-1");
+      section.focus({ preventScroll: true });
+    }
+  }
   if (b.dataset.go) {
     if (b.dataset.go === "mapa") view = "map";
     go(b.dataset.go);
@@ -1148,6 +1163,7 @@ document.addEventListener(
   (e) => {
     if (
       e.target.tagName === "IMG" &&
+      !e.target.closest(".brand") &&
       !e.target.classList.contains("leaflet-tile") &&
       !e.target.classList.contains("leaflet-marker-icon") &&
       !e.target.dataset.fallback

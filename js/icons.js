@@ -1,5 +1,9 @@
 // Shared line icons: the same stroke, proportions and family across the application.
 const paths = {
+  photo:
+    '<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="2"/><path d="m3 17 6-6 4 4 3-3 5 5"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  link: '<path d="m10 14 4-4M8 16l-2 2a4 4 0 0 1-6-6l5-5a4 4 0 0 1 6 0M16 8l2-2a4 4 0 0 1 6 6l-5 5a4 4 0 0 1-6 0" transform="translate(1 0) scale(.9)"/>',
   expand: '<path d="M14 3h7v7M10 21H3v-7M21 3l-7 7M3 21l7-7"/>',
   collapse: '<path d="M3 10h7V3M21 14h-7v7M10 10 3 3M14 14l7 7"/>',
   menu: '<path d="M4 6h16M4 12h16M4 18h16"/>',

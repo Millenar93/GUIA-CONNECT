@@ -893,3 +893,215 @@ dialog .dialog-close {
   width: 17px;
   height: 17px;
 }
+/* Reference: Guia Connect visual presentation v4. The original JPEG logo is unchanged. */
+:root {
+  --deep: #06254c;
+  --ink: #082b55;
+  --teal: #0878de;
+  --cyan: #08bcec;
+}
+.app-shell header {
+  height: 96px;
+  min-height: 96px;
+  padding-top: 8px;
+  background: linear-gradient(135deg, #061e40, #08365c);
+  border-bottom: 0;
+}
+.app-shell .brand {
+  position: relative;
+  display: block;
+  width: 194px;
+  height: 44px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.app-shell .brand img {
+  position: absolute;
+  width: 278px;
+  height: auto;
+  max-width: none;
+  left: -42px;
+  top: -30px;
+  display: block;
+}
+.app-shell #city {
+  color: #dbedff;
+}
+.app-shell .demo {
+  top: 17px;
+  background: #e3f8ff;
+  color: #14466d;
+}
+.app-shell .visual-hero {
+  margin: -25px -18px 20px;
+  padding: 30px 22px 24px;
+  min-height: 200px;
+  background:
+    linear-gradient(125deg, #05264ef2, #07598bcc),
+    url("illustration.svg") center/cover;
+  border-radius: 0 0 28px 28px;
+  color: white;
+}
+.app-shell .visual-hero .eyebrow {
+  color: #b4eafb;
+}
+.app-shell .visual-hero h1 {
+  font-size: 34px;
+  margin: 18px 0 6px;
+  max-width: 290px;
+}
+.app-shell .visual-hero strong {
+  font:
+    800 28px Manrope,
+    system-ui,
+    sans-serif;
+  color: var(--cyan);
+  letter-spacing: -1px;
+}
+.app-shell .visual-hero small {
+  display: block;
+  margin-top: 16px;
+  font-size: 10px;
+  color: #c9e8fb;
+}
+.app-shell .category {
+  border-radius: 18px;
+  background: linear-gradient(145deg, white, #f3f8fd);
+}
+.app-shell .category .symbol {
+  background: #dff4fd;
+  color: #0579bb !important;
+}
+.app-shell .ranking-heading h1 {
+  color: var(--deep);
+  margin-top: 16px;
+}
+.app-shell .rank strong {
+  background: var(--deep);
+  color: white;
+  min-width: 30px;
+  height: 32px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+.app-shell .rank {
+  border: 0;
+  box-shadow: 0 3px 16px #06254c09;
+}
+.app-shell .business-cover {
+  margin: 20px 0 0;
+  position: relative;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+  background: white;
+}
+.app-shell .business-cover img {
+  width: 100%;
+  height: 175px;
+  object-fit: cover;
+  display: block;
+}
+.app-shell .business-cover div {
+  position: relative;
+  margin-top: -20px;
+  padding: 23px 20px;
+  background: white;
+  border-radius: 22px 22px 0 0;
+}
+.app-shell .business-cover b {
+  font:
+    800 20px Manrope,
+    system-ui,
+    sans-serif;
+  color: var(--deep);
+}
+.app-shell .business-cover span {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.app-shell .business-shortcuts {
+  border: 1px solid var(--line);
+  border-radius: 0 0 18px 18px;
+  background: white;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.app-shell .business-shortcuts button {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  gap: 15px;
+  width: 100%;
+  padding: 17px 18px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  min-height: 74px;
+  background: white;
+}
+.app-shell .business-shortcuts button:last-child {
+  border-bottom: 0;
+}
+.app-shell .business-shortcuts button > .line-icon {
+  width: 26px;
+  height: 26px;
+  color: var(--deep);
+}
+.app-shell .business-shortcuts span {
+  flex: 1;
+}
+.app-shell .business-shortcuts b {
+  display: block;
+  font-size: 15px;
+}
+.app-shell .business-shortcuts small {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 5px;
+}
+.app-shell .sheet-photo {
+  border-radius: 14px;
+}
+.app-shell .sheet-content h2 {
+  font-weight: 800;
+  color: var(--deep);
+}
+.app-shell .sheet-content .links a[href*="wa.me"],
+.app-shell .sheet-content .links a[href*="whatsapp.com"] {
+  background: #087c48;
+  border-color: #087c48;
+  color: white;
+}
+.app-shell .sheet-content .links a[href*="waze.com"],
+.app-shell .sheet-content .links a[href*="google.com/maps"] {
+  background: #0878de;
+  border-color: #0878de;
+  color: white;
+}
+.app-shell .sheet-content .links #digital-menu {
+  background: white;
+  border-color: #0878de;
+  color: #075caa;
+}
+.app-shell nav button.center.active .nav-icon {
+  background: linear-gradient(135deg, #0756ac, #08bcec);
+}
+@media (max-width: 480px) {
+  .app-shell header {
+    height: calc(96px + env(safe-area-inset-top));
+    min-height: calc(96px + env(safe-area-inset-top));
+    padding-top: calc(8px + env(safe-area-inset-top));
+  }
+  .app-shell .demo {
+    top: calc(17px + env(safe-area-inset-top));
+  }
+}
+.app-shell .brand {
+  width: 198px;
+}
